@@ -43,25 +43,25 @@ The system comprises a frontend React client, a rust-based Soroban contract, a b
 ```mermaid
 graph TD
     subgraph Frontend Client
-        React[React / TypeScript Frontend]
-        SWK[StellarWalletsKit]
+        React["React / TypeScript Frontend"]
+        SWK["StellarWalletsKit"]
         React --> SWK
     end
 
     subgraph Stellar Blockchain
-        RPC[Soroban RPC]
-        Contract[Escrow Contract (Rust)]
-        Testnet[Stellar Testnet Ledger]
+        RPC["Soroban RPC"]
+        Contract["Escrow Contract (Rust)"]
+        Testnet["Stellar Testnet Ledger"]
         SWK -->|Submit Tx| RPC
         RPC -->|Invoke Functions| Contract
         Contract -->|State Changes| Testnet
     end
 
     subgraph External Infrastructure
-        Sentry[Sentry (Error Monitoring)]
-        Analytics[[PostHog]]
-        Backend[[Express + SQLite Backend]]
-        DB[(SQLite Database)]
+        Sentry["Sentry (Error Monitoring)"]
+        Analytics["PostHog"]
+        Backend["Express + SQLite Backend"]
+        DB["SQLite Database"]
         
         React -->|Capture Errors| Sentry
         React -->|Log Usage Events| Analytics
