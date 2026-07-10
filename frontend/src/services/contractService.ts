@@ -108,7 +108,7 @@ async function writeContract(
       const assembledTx = rpc.assembleTransaction(tx, simulation);
       
       // Request Freighter / Wallet Kit signature using static class
-      const { signedTxXdr } = await StellarWalletsKit.signTransaction((assembledTx as any).toXDR(), {
+      const { signedTxXdr } = await StellarWalletsKit.signTransaction((assembledTx as any).toEnvelope().toXDR('base64'), {
         address: userAddress,
         networkPassphrase: NETWORK_PASSPHRASE
       });
