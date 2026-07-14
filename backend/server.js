@@ -4,10 +4,14 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 require('dotenv').config();
 
+/**
+ * Express application setup
+ * PORT is configurable via environment variables (default: 5000)
+ */
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// Enable Cross-Origin Resource Sharing (CORS) and JSON request parsing middleware
 app.use(cors());
 app.use(express.json());
 
