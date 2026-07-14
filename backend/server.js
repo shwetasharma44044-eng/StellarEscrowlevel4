@@ -45,7 +45,11 @@ db.serialize(() => {
 });
 
 // Endpoints
-// Submit feedback
+
+/**
+ * POST /api/feedback
+ * Submit a new user feedback record containing rating, comment, and wallet address.
+ */
 app.post('/api/feedback', (req, res) => {
   const { rating, comment, walletAddress } = req.body;
 
@@ -75,7 +79,10 @@ app.post('/api/feedback', (req, res) => {
   });
 });
 
-// Get aggregated and raw feedback
+/**
+ * GET /api/feedback
+ * Retrieve aggregated feedback statistics and the full list of submissions.
+ */
 app.get('/api/feedback', (req, res) => {
   const statsQuery = `SELECT COUNT(*) as count, AVG(rating) as avgRating FROM feedback`;
   const listQuery = `SELECT * FROM feedback ORDER BY timestamp DESC`;
