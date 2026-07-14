@@ -29,6 +29,12 @@ export interface FeedbackStats {
   submissions: FeedbackSubmission[];
 }
 
+/**
+ * Submit user rating and comment feedback to the backend API.
+ * @param data FeedbackInput containing rating, comment, and optional walletAddress.
+ * @returns Promise that resolves on successful submission.
+ * @throws Error when backend request fails or validation fails.
+ */
 export const submitFeedback = async (data: FeedbackInput): Promise<void> => {
   const response = await fetch(`${API_URL}/feedback`, {
     method: 'POST',
@@ -44,6 +50,11 @@ export const submitFeedback = async (data: FeedbackInput): Promise<void> => {
   }
 };
 
+/**
+ * Fetch aggregated statistics and all individual submissions.
+ * @returns Promise resolving to a FeedbackStats object.
+ * @throws Error when retrieving feedback history fails.
+ */
 export const getFeedbackStats = async (): Promise<FeedbackStats> => {
   const response = await fetch(`${API_URL}/feedback`);
   if (!response.ok) {
