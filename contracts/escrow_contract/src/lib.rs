@@ -49,17 +49,26 @@ pub enum DataKey {
     ProjectCounter,
 }
 
+/// Error codes returned by the Escrow Contract.
 #[soroban_sdk::contracterror]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
 #[repr(u32)]
 pub enum EscrowError {
+    /// The requested project ID does not exist in storage.
     ProjectNotFound = 1,
+    /// The requested milestone was not found in the project.
     MilestoneNotFound = 2,
+    /// The action is invalid for the current status of the milestone.
     InvalidStatus = 3,
+    /// The caller is not authorized to perform the action.
     Unauthorized = 4,
+    /// The action cannot be performed because the deadline has not yet passed.
     DeadlineNotPassed = 5,
+    /// The milestone deadline is invalid (e.g. 0).
     InvalidDeadline = 6,
+    /// The milestone amount is invalid (must be greater than 0).
     InvalidAmount = 7,
+    /// Client and Freelancer addresses cannot be the same.
     SameClientFreelancer = 8,
 }
 
