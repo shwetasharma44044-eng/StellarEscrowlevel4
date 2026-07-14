@@ -4,23 +4,41 @@ use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, token, Add
 #[cfg(test)]
 mod test;
 
+/// Represents a single milestone in the escrow agreement.
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Milestone {
+    /// The amount of tokens allocated for this milestone.
     pub amount: i128,
+    /// Detailed description of the milestone deliverables.
     pub description: String,
-    pub deadline: u64, // Unix timestamp in seconds
-    pub status: u32,   // 0: Created, 1: Funded, 2: Submitted, 4: Disputed, 5: Released, 6: Refunded
+    /// Unix timestamp in seconds representing the deadline of the milestone.
+    pub deadline: u64,
+    /// Status code of the milestone:
+    /// - 0: Created
+    /// - 1: Funded
+    /// - 2: Submitted
+    /// - 4: Disputed
+    /// - 5: Released
+    /// - 6: Refunded
+    pub status: u32,
 }
 
+/// Represents the overall project escrow configuration.
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Project {
+    /// Unique identifier for the project.
     pub id: u64,
+    /// The Address of the Client funding the project.
     pub client: Address,
+    /// The Address of the Freelancer performing the work.
     pub freelancer: Address,
+    /// The Address of the trusted third-party Arbiter.
     pub arbiter: Address,
+    /// The token token Address (e.g. native XLM or custom token).
     pub token: Address,
+    /// The list of milestones belonging to the project.
     pub milestones: Vec<Milestone>,
 }
 
