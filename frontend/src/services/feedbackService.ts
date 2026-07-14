@@ -1,11 +1,17 @@
 const API_URL = import.meta.env.VITE_FEEDBACK_API_URL || 'http://localhost:5000/api';
 
+/**
+ * Input structure required to submit user feedback.
+ */
 export interface FeedbackInput {
   rating: number;
   comment: string;
   walletAddress?: string;
 }
 
+/**
+ * Representation of a single feedback submission stored in the database.
+ */
 export interface FeedbackSubmission {
   id: number;
   rating: number;
@@ -14,6 +20,9 @@ export interface FeedbackSubmission {
   timestamp: string;
 }
 
+/**
+ * Aggregated statistics and history returned by the feedback service.
+ */
 export interface FeedbackStats {
   totalSubmissions: number;
   averageRating: number;
